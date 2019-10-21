@@ -48,10 +48,10 @@
 #endif
 
 /* memory group */
-#include "asm/jz_mem_nand_configs/DDR2_H5PS1G63EFR-G7C.h"
+#include "asm/jz_mem_nand_configs/DDR2_H5PS1G63EFR-Y5C.h"
 //#include "asm/jz_mem_nand_configs/DDR1_H5DU516ETR-E3C.h"
 // [MAY CHANGE] NAND
-#include "asm/jz_mem_nand_configs/NAND_K9GAG08U0M.h"
+//#include "asm/jz_mem_nand_configs/NAND_K9GAG08U0M.h"
 
 #define JZ4760_NORBOOT_CFG	JZ4760_NORBOOT_8BIT	/* NOR Boot config code */
 

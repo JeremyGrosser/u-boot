@@ -16,7 +16,7 @@
 #define DDR_ROW 13  /* ROW : 12 to 14 row address */
 #define DDR_COL 10  /* COL :  8 to 10 column address */
 #define DDR_BANK8 1 /* Banks each chip: 0-4bank, 1-8bank */
-#define DDR_CL 4    /* CAS latency: 1 to 7 */
+#define DDR_CL 5    /* CAS latency: 1 to 7 */
 
 /*
  * DDR2 controller timing1 register
@@ -25,7 +25,7 @@
 #define DDR_tRTP 8   /* 7.5ns READ to PRECHARGE command period. */
 #define DDR_tRP  15  /* tRP: PRECHARGE command period to the same bank */
 #define DDR_tRCD 15  /* ACTIVE to READ or WRITE command period to the same bank. */
-#define DDR_tRC  55  /* ACTIVE to ACTIVE command period to the same bank.*/
+#define DDR_tRC  60  /* ACTIVE to ACTIVE command period to the same bank.*/
 #define DDR_tRRD 10  /* ACTIVE bank A to ACTIVE bank B command period. */
 #define DDR_tWR  15  /* WRITE Recovery Time defined by register MR of DDR2 memory */
 #define DDR_tWTR 10  /* WRITE to READ command delay. */
