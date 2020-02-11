@@ -13,8 +13,7 @@
 #include <config_distro_bootcmd.h>
 #include <environment/ti/mmc.h>
 #include <environment/ti/k3_rproc.h>
-
-#define CONFIG_ENV_SIZE			(128 << 10)
+#include <environment/ti/ufs.h>
 
 /* DDR Configuration */
 #define CONFIG_SYS_SDRAM_BASE1		0x880000000
@@ -55,6 +54,9 @@
 
 #define CONFIG_SYS_BOOTM_LEN		SZ_64M
 #define CONFIG_CQSPI_REF_CLK		133333333
+
+/* HyperFlash related configuration */
+#define CONFIG_SYS_MAX_FLASH_BANKS_DETECT 1
 
 /* U-Boot general configuration */
 #define EXTRA_ENV_J721E_BOARD_SETTINGS					\
@@ -103,7 +105,8 @@
 	DEFAULT_MMC_TI_ARGS						\
 	EXTRA_ENV_J721E_BOARD_SETTINGS					\
 	EXTRA_ENV_J721E_BOARD_SETTINGS_MMC				\
-	EXTRA_ENV_RPROC_SETTINGS
+	EXTRA_ENV_RPROC_SETTINGS					\
+	DEFAULT_UFS_TI_ARGS
 
 /* Now for the remaining common defines */
 #include <configs/ti_armv7_common.h>

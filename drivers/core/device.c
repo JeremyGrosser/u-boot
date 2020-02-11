@@ -9,6 +9,7 @@
  */
 
 #include <common.h>
+#include <cpu_func.h>
 #include <asm/io.h>
 #include <clk.h>
 #include <fdtdec.h>
@@ -423,7 +424,7 @@ int device_probe(struct udevice *dev)
 		 * Process 'assigned-{clocks/clock-parents/clock-rates}'
 		 * properties
 		 */
-		ret = clk_set_defaults(dev);
+		ret = clk_set_defaults(dev, 0);
 		if (ret)
 			goto fail;
 	}

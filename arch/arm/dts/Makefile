@@ -67,6 +67,10 @@ dtb-$(CONFIG_KIRKWOOD) += \
 dtb-$(CONFIG_ARCH_OWL) += \
 	bubblegum_96.dtb
 
+dtb-$(CONFIG_ROCKCHIP_PX30) += \
+	px30-evb.dtb \
+	px30-firefly.dtb
+
 dtb-$(CONFIG_ROCKCHIP_RK3036) += \
 	rk3036-sdk.dtb
 
@@ -87,11 +91,16 @@ dtb-$(CONFIG_ROCKCHIP_RK3288) += \
 	rk3288-popmetal.dtb \
 	rk3288-rock2-square.dtb \
 	rk3288-tinker.dtb \
+	rk3288-tinker-s.dtb \
 	rk3288-veyron-jerry.dtb \
 	rk3288-veyron-mickey.dtb \
 	rk3288-veyron-minnie.dtb \
 	rk3288-veyron-speedy.dtb \
 	rk3288-vyasa.dtb
+
+dtb-$(CONFIG_ROCKCHIP_RK3308) += \
+	rk3308-evb.dtb \
+	rk3308-roc-cc.dtb
 
 dtb-$(CONFIG_ROCKCHIP_RK3328) += \
 	rk3328-evb.dtb \
@@ -111,6 +120,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3399) += \
 	rk3399-khadas-edge.dtb \
 	rk3399-khadas-edge-captain.dtb \
 	rk3399-khadas-edge-v.dtb \
+	rk3399-leez-p710.dtb \
 	rk3399-nanopc-t4.dtb \
 	rk3399-nanopi-m4.dtb \
 	rk3399-nanopi-neo4.dtb \
@@ -250,9 +260,12 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
 	avnet-ultra96-rev1.dtb			\
 	avnet-ultrazedev-cc-v1.0-ultrazedev-som-v1.0.dtb	\
 	zynqmp-a2197-revA.dtb			\
-	zynqmp-a2197-g-revA.dtb			\
-	zynqmp-a2197-m-revA.dtb			\
-	zynqmp-a2197-p-revA.dtb			\
+	zynqmp-e-a2197-00-revA.dtb		\
+	zynqmp-g-a2197-00-revA.dtb		\
+	zynqmp-m-a2197-01-revA.dtb		\
+	zynqmp-m-a2197-02-revA.dtb		\
+	zynqmp-m-a2197-03-revA.dtb		\
+	zynqmp-p-a2197-00-revA.dtb		\
 	zynqmp-mini.dtb				\
 	zynqmp-mini-emmc0.dtb			\
 	zynqmp-mini-emmc1.dtb			\
@@ -268,6 +281,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
 	zynqmp-zcu111-revA.dtb			\
 	zynqmp-zcu1275-revA.dtb			\
 	zynqmp-zcu1275-revB.dtb			\
+	zynqmp-zcu216-revA.dtb			\
 	zynqmp-zc1232-revA.dtb			\
 	zynqmp-zc1254-revA.dtb			\
 	zynqmp-zc1751-xm015-dc1.dtb		\
@@ -510,7 +524,8 @@ dtb-$(CONFIG_MACH_SUN8I_H3) += \
 	sun8i-h3-orangepi-pc.dtb \
 	sun8i-h3-orangepi-pc-plus.dtb \
 	sun8i-h3-orangepi-plus.dtb \
-	sun8i-h3-orangepi-plus2e.dtb
+	sun8i-h3-orangepi-plus2e.dtb \
+	sun8i-h3-orangepi-zero-plus2.dtb
 dtb-$(CONFIG_MACH_SUN8I_R40) += \
 	sun8i-r40-bananapi-m2-ultra.dtb \
 	sun8i-v40-bananapi-m2-berry.dtb
@@ -537,6 +552,7 @@ dtb-$(CONFIG_MACH_SUN50I) += \
 	sun50i-a64-nanopi-a64.dtb \
 	sun50i-a64-oceanic-5205-5inmfd.dtb \
 	sun50i-a64-olinuxino.dtb \
+	sun50i-a64-olinuxino-emmc.dtb \
 	sun50i-a64-orangepi-win.dtb \
 	sun50i-a64-pine64-lts.dtb \
 	sun50i-a64-pine64-plus.dtb \
@@ -561,6 +577,7 @@ dtb-$(CONFIG_MX53) += imx53-cx9020.dtb \
 
 ifneq ($(CONFIG_MX6DL)$(CONFIG_MX6QDL)$(CONFIG_MX6S),)
 dtb-y += \
+	imx6dl-brppt2.dtb \
 	imx6dl-dhcom-pdk2.dtb \
 	imx6dl-icore.dtb \
 	imx6dl-icore-mipi.dtb \
@@ -585,6 +602,7 @@ dtb-y += \
 	imx6q-icore-rqs.dtb \
 	imx6q-kp.dtb \
 	imx6q-logicpd.dtb \
+	imx6q-mccmon6.dtb\
 	imx6q-nitrogen6x.dtb \
 	imx6q-novena.dtb \
 	imx6q-pico.dtb \
@@ -647,11 +665,15 @@ dtb-$(CONFIG_ARCH_MX7ULP) += imx7ulp-evk.dtb
 dtb-$(CONFIG_ARCH_IMX8) += \
 	fsl-imx8qm-apalis.dtb \
 	fsl-imx8qm-mek.dtb \
+	imx8qm-rom7720-a1.dtb \
+	fsl-imx8qxp-ai_ml.dtb \
 	fsl-imx8qxp-colibri.dtb \
 	fsl-imx8qxp-mek.dtb
 
-dtb-$(CONFIG_ARCH_IMX8M) += fsl-imx8mq-evk.dtb \
-	imx8mm-evk.dtb
+dtb-$(CONFIG_ARCH_IMX8M) += \
+	imx8mm-evk.dtb \
+	imx8mn-ddr4-evk.dtb \
+	imx8mq-evk.dtb
 
 dtb-$(CONFIG_RCAR_GEN2) += \
 	r8a7790-lager-u-boot.dtb \
@@ -816,7 +838,8 @@ dtb-$(CONFIG_SOC_K3_J721E) += k3-j721e-common-proc-board.dtb \
 dtb-$(CONFIG_ARCH_MEDIATEK) += \
 	mt7623n-bananapi-bpi-r2.dtb \
 	mt7629-rfb.dtb \
-	mt8516-pumpkin.dtb
+	mt8516-pumpkin.dtb \
+	mt8518-ap1-emmc.dtb
 
 dtb-$(CONFIG_TARGET_GE_BX50V3) += imx6q-bx50v3.dtb
 dtb-$(CONFIG_TARGET_MX53PPD) += imx53-ppd.dtb
@@ -824,6 +847,8 @@ dtb-$(CONFIG_TARGET_MX53PPD) += imx53-ppd.dtb
 dtb-$(CONFIG_TARGET_VEXPRESS_CA5X2) += vexpress-v2p-ca5s.dtb
 dtb-$(CONFIG_TARGET_VEXPRESS_CA9X4) += vexpress-v2p-ca9.dtb
 dtb-$(CONFIG_TARGET_VEXPRESS_CA15_TC2) += vexpress-v2p-ca15_a7.dtb
+
+dtb-$(CONFIG_TARGET_DURIAN) += phytium-durian.dtb
 
 targets += $(dtb-y)
 
@@ -834,4 +859,4 @@ PHONY += dtbs
 dtbs: $(addprefix $(obj)/, $(dtb-y))
 	@:
 
-clean-files := *.dtb *_HS
+clean-files := *.dtb *.dtbo *_HS

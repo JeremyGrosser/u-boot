@@ -11,13 +11,17 @@
 #include <binman_sym.h>
 #include <dm.h>
 #include <handoff.h>
+#include <irq_func.h>
+#include <serial.h>
 #include <spl.h>
 #include <asm/u-boot.h>
 #include <nand.h>
 #include <fat.h>
+#include <u-boot/crc.h>
 #include <version.h>
 #include <image.h>
 #include <malloc.h>
+#include <mapmem.h>
 #include <dm/root.h>
 #include <linux/compiler.h>
 #include <fdt_support.h>
@@ -396,13 +400,25 @@ static int spl_common_init(bool setup_malloc)
 		gd->malloc_ptr = 0;
 	}
 #endif
-	ret = bootstage_init(true);
+	ret = bootstage_init(u_boot_first_phase());
 	if (ret) {
 		debug("%s: Failed to set up bootstage: ret=%d\n", __func__,
 		      ret);
 		return ret;
 	}
-	bootstage_mark_name(BOOTSTAGE_ID_START_SPL, "spl");
+#ifdef CONFIG_BOOTSTAGE_STASH
+	if (!u_boot_first_phase()) {
+		const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
+					       CONFIG_BOOTSTAGE_STASH_SIZE);
+
+		ret = bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
+		if (ret)
+			debug("%s: Failed to unstash bootstage: ret=%d\n",
+			      __func__, ret);
+	}
+#endif /* CONFIG_BOOTSTAGE_STASH */
+	bootstage_mark_name(spl_phase() == PHASE_TPL ? BOOTSTAGE_ID_START_TPL :
+			    BOOTSTAGE_ID_START_SPL, SPL_TPL_NAME);
 #if CONFIG_IS_ENABLED(LOG)
 	ret = log_init();
 	if (ret) {
@@ -418,7 +434,8 @@ static int spl_common_init(bool setup_malloc)
 		}
 	}
 	if (CONFIG_IS_ENABLED(DM)) {
-		bootstage_start(BOOTSTATE_ID_ACCUM_DM_SPL, "dm_spl");
+		bootstage_start(BOOTSTATE_ID_ACCUM_DM_SPL,
+				spl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
 		/* With CONFIG_SPL_OF_PLATDATA, bring in all devices */
 		ret = dm_init_and_scan(!CONFIG_IS_ENABLED(OF_PLATDATA));
 		bootstage_accum(BOOTSTATE_ID_ACCUM_DM_SPL);
@@ -704,8 +721,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
 	      gd->malloc_ptr / 1024);
 #endif
+	bootstage_mark_name(spl_phase() == PHASE_TPL ? BOOTSTAGE_ID_END_TPL :
+			    BOOTSTAGE_ID_END_SPL, "end " SPL_TPL_NAME);
 #ifdef CONFIG_BOOTSTAGE_STASH
-	bootstage_mark_name(BOOTSTAGE_ID_END_SPL, "end_spl");
 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
 			      CONFIG_BOOTSTAGE_STASH_SIZE);
 	if (ret)
@@ -814,3 +832,14 @@ ulong spl_relocate_stack_gd(void)
 	return 0;
 #endif
 }
+
+#if defined(CONFIG_BOOTCOUNT_LIMIT) && !defined(CONFIG_SPL_BOOTCOUNT_LIMIT)
+void bootcount_store(ulong a)
+{
+}
+
+ulong bootcount_load(void)
+{
+	return 0;
+}
+#endif

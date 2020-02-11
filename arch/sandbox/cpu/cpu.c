@@ -4,6 +4,7 @@
  */
 
 #include <common.h>
+#include <cpu_func.h>
 #include <dm.h>
 #include <errno.h>
 #include <linux/libfdt.h>
@@ -246,8 +247,7 @@ unsigned int sandbox_read(const void *addr, enum sandboxio_size_t size)
 	return 0;
 }
 
-void sandbox_write(const void *addr, unsigned int val,
-		   enum sandboxio_size_t size)
+void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size)
 {
 	struct sandbox_state *state = state_get_current();
 
